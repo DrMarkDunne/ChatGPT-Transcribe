@@ -19,7 +19,8 @@ pip install openai python-dotenv python-docx
 ## Setup
 1. Clone the repository or download the zip file and extract it.
 2. Navigate to the project directory.
-3. Create a .env file in the project directory and add your OpenAI API key in that file:
+3. Create a .env file in the project directory and add your OpenAI API ([OpenAI website](https://openai.com/)
+- Python 3.x installed) key in that file:
 ```bash
 API_KEY=<your OpenAI API key here>
 ```
