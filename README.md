@@ -28,12 +28,11 @@ API_KEY=<your OpenAI API key here>
 ## How to Run
 You can run the project with Python:
 ```bash
-python test.py
+python meetingTranscriptionFromAudioFile.py <audio file>
 ```
-In `test.py`, replace `"Earningscall.wav"` with the path to your audio file.
 
 ## Description
-This tool transcribes an audio file into text using the OpenAI audio transcription model. It then uses GPT-4 to extract meeting minutes, including the abstract summary, key points, action items, and sentiment analysis of the transcription. The results are saved as a `meeting_minutes.docx` Word file.
+This tool transcribes an audio file into text using the OpenAI audio transcription model. It then uses GPT-4 to extract meeting minutes, including the abstract summary, key points, action items, and sentiment analysis of the transcription. The results are saved as a `meeting_minutes_<UTC_Timestamp>.docx` Word file.
 
 Please note that for large audio files, the script breaks the audio file into smaller chunks and transcribes each separately to adhere to OpenAI's API content size limits.
 
