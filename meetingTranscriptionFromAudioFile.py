@@ -8,10 +8,12 @@ from datetime import datetime
 load_dotenv()  # load environment variables from .env file
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 def transcribe_audio(audio_file_path):
     with open(audio_file_path, 'rb') as audio_file:
         transcription = openai.Audio.transcribe("whisper-1", audio_file)
     return transcription['text']
+
 
 def meeting_minutes(transcription):
     abstract_summary = abstract_summary_extraction(transcription)
@@ -24,6 +26,7 @@ def meeting_minutes(transcription):
         'action_items': action_items,
         'sentiment': sentiment
     }
+
 
 def abstract_summary_extraction(transcription):
     response = openai.ChatCompletion.create(
@@ -42,6 +45,7 @@ def abstract_summary_extraction(transcription):
     )
     return response['choices'][0]['message']['content']
 
+
 def key_points_extraction(transcription):
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -58,6 +62,7 @@ def key_points_extraction(transcription):
         ]
     )
     return response['choices'][0]['message']['content']
+
 
 def action_item_extraction(transcription):
     response = openai.ChatCompletion.create(
@@ -76,6 +81,7 @@ def action_item_extraction(transcription):
     )
     return response['choices'][0]['message']['content']
 
+
 def sentiment_analysis(transcription):
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -93,10 +99,11 @@ def sentiment_analysis(transcription):
     )
     return response['choices'][0]['message']['content']
 
+
 def save_as_docx(minutes):
     # Get current UTC timestamp and format it as string
     timestamp = datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    
+
     # Construct filename
     filename = f'meeting_minutes_{timestamp}.docx'
 
@@ -111,13 +118,15 @@ def save_as_docx(minutes):
 
     # Save the Document with the filename which now includes a timestamp
     doc.save(filename)
-    
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python script.py <audio_file>")
         sys.exit(1)
 
-    audio_file_path = sys.argv[1]  # get audio file path from command-line argument
+    # get audio file path from command-line argument
+    audio_file_path = sys.argv[1]
     transcription = transcribe_audio(audio_file_path)
     print("Transcription: ", transcription)
     minutes = meeting_minutes(transcription)
