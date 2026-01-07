@@ -1,47 +1,49 @@
-# ChatGPT-Transcribe
-A simple Python-based tool to transcribe audio files using OpenAI and GPT-4.
+# Meeting Minutes Generator
+
+A powerful and beautiful tool to generate professional meeting minutes from audio files using OpenAI's Whisper and GPT-4.
+
+## Features
+
+- **Audio Transcription**: Uses OpenAI's Whisper model to accurately transcribe audio files.
+- **Automated Minutes**: Generates Abstract Summary, Key Points, Action Items, and Sentiment Analysis using GPT-4.
+- **Fast Processing**: Uses parallel requests for efficient generation.
+- **Beautiful UI**: User-friendly interface built with Streamlit.
+- **Export to DOCX**: Download the generated minutes as a formatted Word document.
 
 ## Prerequisites
-- An OpenAI account and API key. You can obtain it from the [OpenAI website](https://openai.com/)
-- Python 3.x installed
-- pip installed
 
-## Required Python Libraries
-- openai
-- python-dotenv
-- python-docx
+- Python 3.8+
+- OpenAI API Key
 
-You can install these using pip:
+## Installation
+
+1. Clone the repository.
+2. Install the required dependencies:
+
 ```bash
-pip install openai python-dotenv python-docx
+pip install -r requirements.txt
 ```
 
-## Setup
-1. Clone the repository or download the zip file and extract it.
-2. Navigate to the project directory.
-3. Create a .env file in the project directory and add your OpenAI API ([OpenAI website](https://openai.com/)
-- Python 3.x installed) key in that file:
-```bash
-API_KEY=<your OpenAI API key here>
-```
-4. Install the necessary libraries.
+3. Create a `.env` file in the root directory and add your OpenAI API Key (optional, can also be entered in the UI):
 
-## How to Run
-You can run the project with Python:
-```bash
-python meetingTranscriptionFromAudioFile.py <audio file>
+```
+OPENAI_API_KEY=your_api_key_here
 ```
 
-## Description
-This tool transcribes an audio file into text using the OpenAI audio transcription model. It then uses GPT-4 to extract meeting minutes, including the abstract summary, key points, action items, and sentiment analysis of the transcription. The results are saved as a `meeting_minutes_<UTC_Timestamp>.docx` Word file.
+## Usage
 
-Please note that for large audio files, the script breaks the audio file into smaller chunks and transcribes each separately to adhere to OpenAI's API content size limits.
+To start the application, run:
 
-## Limitations
-Due to OpenAI's API content size limitations, this tool might not work with large audio files (greater than 25 MB).
+```bash
+streamlit run app.py
+```
 
-## License
-This project is licensed under the MIT License.
+Upload your audio file (mp3, m4a, wav, mp4), and click "Generate Minutes".
 
-## Contact
-For any issues or suggestions related to this tool, please contact the repository owner.
+## Testing
+
+To run the tests:
+
+```bash
+python -m unittest tests/test_meeting_generator.py
+```
